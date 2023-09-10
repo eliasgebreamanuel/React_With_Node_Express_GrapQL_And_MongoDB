@@ -2,14 +2,18 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const schema = require('./schema/schema.js');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
+const app = express();
+
+app.use(cors());
 // this is used to connect to the mongodb database
 mongoose.connect('mongodb+srv://eliasgebreamanuelhailu:23687930@gql-react.glejirf.mongodb.net/?retryWrites=true&w=majority');
 mongoose.connection.once('open', () => {
     console.log('Connected To Database');
 });
 
-const app = express();
+//const app = express();
 app.use('/graphql', graphqlHTTP({
     schema,
     graphiql: true
